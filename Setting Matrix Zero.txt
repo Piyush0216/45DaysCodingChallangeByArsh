@@ -25,6 +25,40 @@ _______SOLUTION_______
 // then we will pushback the index of row in row vector and coloumn index in column vector;
 // traversing each row and seprately and setting zero from the index to the last of them;;
 
+//creating two vectors for row and column and also getting size of row and column
+        
+        int n = mat.size();  // size of row
+        int m = mat[0].size();  // size of column
+        vector<int> r,c;
+
+// traversing the rows and column for finding the index of zero where we r getting
+        for(int i=0; i<n; i++){
+            for(int j = 0; j<m; j++){
+                if(mat[i][j] == 0){
+                    r.push_back(i);     // tell rows which have to be 0
+                    c.push_back(j);     // tell column which have to be 0
+                }
+            }
+        }
+
+        // setting rows 0 ;
+
+        for(int i=0; i<r.size(); i++){
+            int index = r[i];
+            for(int j = 0; j<m; j++){
+                mat[index][j]=0;
+            }
+        }
+
+        // column -> 0
+
+        for(int i=0; i<c.size(); i++){
+            int index = c[i];
+            for(int j = 0; j<n; j++){
+                mat[j][index]=0;
+            }
+        }
+
 
 
 // mapping the rows and column index with zero if we find zero in the any index then map that index of row or column with 0; 
