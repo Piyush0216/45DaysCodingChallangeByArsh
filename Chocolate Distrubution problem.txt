@@ -1,0 +1,49 @@
+PROBLEM ---->
+
+Given an array of N integers where each value represents the number of chocolates in a packet. Each packet can have a variable number of chocolates. There are m students, the task is to distribute chocolate packets such that: 
+
+Each student gets one packet.
+The difference between the number of chocolates in the packet with maximum chocolates and the packet with minimum chocolates given to the students is minimum. 
+
+
+
+<------ SOLUTION ------->
+
+<<--- APPROACH --->> 
+ 
+1. check if there are no chocolate or number of student is zero if yes then return 0;
+2. sort the vector in ascending order;
+3. check if the number of packets is smaller than the numbers of student then return -1 because distribution is not possible;
+4. create a variable for getting minimum difference and traverse the vector for 0 to i+m-1 smaller than size ;
+5. check if the difference of i+m-1 th index value and ith index value is smaller than minimum difference then update the minimum           
+   difference by the diffrence of a[i+m-1] - a[i];
+6. return the minimum difference 
+
+
+
+ long long findMinDiff(vector<long long> a, long long n, long long m){
+        
+         // if there are no chocolates or number
+         // of students is 0
+         if (m == 0 || n == 0)
+            return 0;
+        
+        sort(a.begin(),a.end());
+        
+         // Number of students cannot be more than
+        // number of packets
+        if (n < m)
+           return -1;
+           
+        long long min_dif = INT_MAX;
+         
+        
+        for(int i=0;i+m-1<n;i++){
+           
+            
+            if((a[i+m-1] - a[i]) < min_dif){
+                min_dif = a[i+m-1]-a[i];
+            }
+        }
+        return min_dif;
+    }   
