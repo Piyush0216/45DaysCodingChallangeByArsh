@@ -1,0 +1,47 @@
+Given an integer array nums and an integer k, return the number of non-empty subarrays that have a sum divisible by k.
+
+A subarray is a contiguous part of an array.
+
+ 
+
+Example 1:
+
+Input: nums = [4,5,0,-2,-3,1], k = 5
+Output: 7
+Explanation: There are 7 subarrays with a sum divisible by k = 5:
+[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]
+Example 2:
+
+Input: nums = [5], k = 9
+Output: 0
+
+ANSWER ----->>
+
+// Get the size of the input array
+		int n = nums.size();
+		// Create an array of size k and initialize all elements to 0
+		vector<int> ch(k, 0);
+		// Initialize the first element to 1
+		ch[0] = 1;
+		// Initialize sum to 0
+		int sum = 0;
+		// Iterate through the input array
+		for (int i = 0; i < n; i++)
+		{
+			// Add the current element to the sum and take the modulus with k
+			// Add k to the modulus to ensure it's positive
+			sum += nums[i] % k + k;
+			// Increment the count of the modulus of the current sum in the ch array
+			ch[(sum) % k]++;
+		}
+		// Initialize the answer to 0
+		int ans = 0;
+		// Iterate through the ch array
+		for (int i = 0; i < k; i++)
+		{
+			// Add the number of possible subarrays that have a modulus of i to the answer
+			// using the formula for combination (n choose 2)
+			ans += (ch[i] * (ch[i] - 1)) / 2;
+		}
+		// Return the final answer
+		return ans;
